@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'mycard.dart';
+import 'mynewcard2.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController mynewcontroller = TextEditingController();
   List<String> mylist = [];
   String mytext;
+
   //shownewdialogstart
   shownewdialod() {
     return showDialog(
@@ -66,11 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            MyNewDialog(mytesthilist: mylist,mytesthitext: mytext);
+        floatingActionButton: FloatingActionButton (
+          onPressed: ()=> _MyNewDialogState(myhilist:mylist,myhitext: mytext).showhidialod(context)
             //이거 해결하기 나중에 위젯으로 불러서 해결하기
-          },
+          
         ),
         body: ListView(
           children: <Widget>[
@@ -106,13 +106,12 @@ class _MyNewDialogState extends State<MyNewDialog> {
 TextEditingController myhicontroller = TextEditingController();
 var myhitext;
 List myhilist;
-_MyNewDialogState({this.myhilist,this.myhitext});
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      child: AlertDialog(
-        title: Text("DIALOG"),
+showhidialod(BuildContext context){
+  print('inside show hi dialog');
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("DIALOG"),
               content: TextField(
                 controller: myhicontroller,
               ),
@@ -142,8 +141,15 @@ _MyNewDialogState({this.myhilist,this.myhitext});
                   ],
                 )
               ],
-
-      ),
-    );
+            ));
   }
-}
+_MyNewDialogState({this.myhilist,this.myhitext});
+  Widget build(BuildContext context){
+    return Center(
+      child: showhidialod(context),
+    );
+    
+  }
+    
+  }
+
